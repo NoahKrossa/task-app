@@ -1,0 +1,20 @@
+POST http://localhost:8080/api/task
+Content-Type: application/json
+
+{
+    "title": "Test",
+    "description": "This is a default desc..."
+}
+###
+
+DELETE http://localhost:8080/api/task/5e5a894ca481c852dbf8339f
+Content-Type: application/json
+###
+
+PUT http://localhost:8080/api/task/5e5a8997a481c852dbf833a0
+Content-Type: application/json
+
+{
+    "title": "Updated task Demo title!",
+    "description": "This is a default desc..."
+}
