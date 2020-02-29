@@ -9,7 +9,7 @@ Es una aplicacion web que permite a sus usuarios gestionar una lista de tareas c
 > Implementar la interface gráfica en vue.js a medida que vaya progresando en mi aprendizaje.
 
 ```bash
-# Antes de utilizar instalar dependencias
+# Antes de utilizar, instalar dependencias
 npm install --save ss
 # Para Iniciar
 npm start
