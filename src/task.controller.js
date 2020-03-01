@@ -22,22 +22,30 @@ module.exports = {
     },
 
     updateTask(req, res) {
-        Task.findByIdAndUpdate(req.params['taskId'], req.body, (err, update) => {
-            if(err) return res.status(500).send(err)
-            res.send('Updated task!')
-            res.end()
+        Task.findByIdAndUpdate(req.params['taskId'], req.body)
+        .exec()
+        .then(result => {
+            console.log('Updated task')
         })
+        .catch(err => {
+            throw err
+        })
+        res.send('Updated task :D')
+        res.end()
     },
 
     removeTask(req, res) {
-        console.log(req.params['taskId'])    
         
-        Task.findByIdAndDelete(req.params['taskId'], req.body, (err, remove) => {
-            if(err) return res.status(500).send(err)
-
-            res.send('Removed task!')
-            res.end()
+        Task.findByIdAndDelete(req.params['taskId'])
+        .exec()
+        .then(result => {
+            console.log('deleted task')
         })
+        .catch(err => {
+            throw err
+        })
+        res.send('deleted task')
+        res.end()
     },
 
     updateTaskState(req, res) {
