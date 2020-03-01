@@ -18,3 +18,10 @@ Content-Type: application/json
     "title": "Updated task Demo title!",
     "description": "This is a default desc..."
 }
+
+PUT http://localhost:8080/api/task/5e5a8997a481c852dbf833a0/state
+Content-Type: application/json
+
+{
+    "isDone": true,
+}
