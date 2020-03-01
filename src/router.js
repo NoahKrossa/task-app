@@ -15,5 +15,8 @@ indexRouter.delete('/task/:taskId', taskCtrl.removeTask)
 // Update task
 indexRouter.put('/task/:taskId',taskCtrl.updateTask)
 
+// Update task state
+indexRouter.put('/task/:taskId/state', taskCtrl.updateTaskState)
+
 // Exporting Task Controller
 module.exports = indexRouter

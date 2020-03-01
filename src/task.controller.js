@@ -8,7 +8,6 @@ module.exports = {
     },
 
     addTask(req, res) {
-        
         const newTask = new Task(req.body)
         
         newTask.save()
@@ -39,5 +38,18 @@ module.exports = {
             res.send('Removed task!')
             res.end()
         })
+    },
+
+    updateTaskState(req, res) {
+        Task.findByIdAndUpdate(req.params['taskId'], {isDone: req.body.isDone})
+        .exec()
+        .then(result => {
+            console.log('Updated task state')
+        })
+        .catch(err => {
+            throw err
+        })
+        res.send('Updated task state')
+        res.end()
     }
 }
