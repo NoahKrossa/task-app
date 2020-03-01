@@ -10,7 +10,7 @@ Es una aplicacion web que permite a sus usuarios gestionar una lista de tareas c
 
 ```bash
 # Antes de utilizar, instalar dependencias
-npm install --save ss
+npm install --save
 # Para Iniciar
 npm start
 
