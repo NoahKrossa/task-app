@@ -1,63 +1,85 @@
 const Task = require('./task.model')
 
 module.exports = {
-    getTasks(req, res) {
-        Task.find()
-        .then(doc => res.json(doc))
-        .catch(err => res.send(err))
+    
+    async getTasks(req, res, next) {
+
+       try { 
+            const tasks = await Task.find({})
+            if(tasks.length === 0) return res.status(404).send('not found')
+            else res.send(tasks)
+            console.log(tasks)
+            delete(tasks)
+        } catch(err) {
+            console.log(err)
+        }
     },
 
-    addTask(req, res) {
-        const newTask = new Task(req.body)
+    async addTask(req, res) {
+
+        try {
+            const newTask = await new Task(req.body)
+            const result = await newTask.save()
+            console.log(result)
+            res.status(200).send('Added new task!')
+            res.end()
+            delete(newTask)
+            delete(result)
+
+        } catch(err) {
+            console.log(err)
+            return res.status(500).send('Something brock!')
+        }
+    },
+
+    async updateTask(req, res) {
         
-        newTask.save()
-        .then(result => {
-            console.log('Added Post')
-        })
-        .catch(err =>{
-            return res.status(500).send(err)
-        })
-        res.send('Added new task!')
-        res.end()
+        try {
+            let taskId = req.params['taskId']
+            let updates = req.body
+            const result = await Task.updateOne({_id: taskId}, updates).exec()
+            console.log(result)
+            res.status(200).send('Updated task!')
+            delete(taskId)
+            delete(updates)
+
+        } catch(err) {
+            console.log(err)
+            return res.status(500).send('Something brock!')
+        }
     },
 
-    updateTask(req, res) {
-        Task.findByIdAndUpdate(req.params['taskId'], req.body)
-        .exec()
-        .then(result => {
-            console.log('Updated task')
-        })
-        .catch(err => {
-            throw err
-        })
-        res.send('Updated task :D')
-        res.end()
-    },
-
-    removeTask(req, res) {
+    async removeTask(req, res) {
         
-        Task.findByIdAndDelete(req.params['taskId'])
-        .exec()
-        .then(result => {
-            console.log('deleted task')
-        })
-        .catch(err => {
-            throw err
-        })
-        res.send('deleted task')
-        res.end()
+        try {
+            let taskId = req.params['taskId']
+            const result = await Task.deleteOne({_id: taskId}).exec()
+            console.log(result)
+            res.status(200).send('One task was be deleted!')
+            delete(taskId)
+            delete(result)
+
+        } catch(err) {
+            console.log(err)
+            return res.status(500).send('Something brock!')
+        }
     },
 
-    updateTaskState(req, res) {
-        Task.findByIdAndUpdate(req.params['taskId'], {isDone: req.body.isDone})
-        .exec()
-        .then(result => {
-            console.log('Updated task state')
-        })
-        .catch(err => {
-            throw err
-        })
-        res.send('Updated task state')
-        res.end()
+    async updateTaskState(req, res) {
+        try {
+            let state = req.body.isDone
+            console.log(typeof(state))
+            if(typeof(state) === undefined || typeof(state) !== 'boolean') return res.status(400).send('Bad request!')
+            let taskId = req.params['taskId']
+            const result = Task.updateOne({_id: taskId}, {isDone: state}).exec()
+            console.log(result)
+            res.status(200).send('Updated task state!')
+            delete(state)
+            delete(taskId)
+
+        } catch(err) {
+            console.log(err)
+            return res.status(500).send('Something brock!')
+        }
     }
 }
