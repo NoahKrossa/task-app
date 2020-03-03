@@ -9,14 +9,10 @@ Es una aplicacion web que permite a sus usuarios gestionar una lista de tareas c
 > Implementar la interface gráfica en vue.js a medida que vaya progresando en mi aprendizaje.
 
 ```bash
-# Antes de utilizar, instalar dependencias
+# Installing dependencies
 npm install --save
-# Para Iniciar
-npm start
 
-# Para modo desarrollo es necesario tener instalado nodemon 
-# como dependencia global de desarrollo, si no lo tiene 
-# instalado, ejecuta el siguient comando
-npm install -g nodemon && nodemon src/index
+# Execute dev server
+npm run dev
 ```
 
