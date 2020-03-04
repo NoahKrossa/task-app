@@ -8,13 +8,23 @@ module.exports = {
             const tasks = await Task.find({})
             if(tasks.length === 0) return res.status(404).send('not found')
             else res.send(tasks)
-            console.log(tasks)
+            console.log('Getting tasks')
             delete(tasks)
+        } catch(err) {
+            console.log(err)
+            return res.status(500).send('Something brock!')
+        }
+    },
+    async doneTasks(req, res, next) {
+        try {
+            const doneTasks = await Task.find({isDone: true}).exec()
+            if(doneTasks.length == 0) return res.status(404).send('not found')
+            res.status(200).send(doneTasks)
+            delete(doneTasks)
         } catch(err) {
             console.log(err)
         }
     },
-
     async addTask(req, res) {
 
         try {
