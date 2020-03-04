@@ -5,7 +5,7 @@ module.exports = {
     async getTasks(req, res, next) {
 
        try { 
-            const tasks = await Task.find({})
+            const tasks = await Task.find({isDone: false})
             if(tasks.length === 0) return res.status(404).send('not found')
             else res.send(tasks)
             console.log('Getting tasks')
