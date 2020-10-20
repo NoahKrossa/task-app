@@ -4,22 +4,22 @@ const todoController = require('./todo.controller')
 const indexRouter = Router()
 
 // Get all tasks
-indexRouter.get('/task',todoController.getTasks)
+indexRouter.get('/todo',todoController.getTodos)
 
 // Get all done tasks
-indexRouter.get('/task/done',todoController.getCompletedTodos)
+indexRouter.get('/todo/completed',todoController.getCompletedTodos)
 
 // Add new task
-indexRouter.post('/task',todoController.addTask)
+indexRouter.post('/todo',todoController.addTodo)
 
 // Delete task
-indexRouter.delete('/task/:taskId', todoController.removeTodo)
+indexRouter.delete('/todo/:todoId', todoController.removeTodo)
 
 // Update task
-indexRouter.put('/task/:taskId',todoController.updateTodo)
+indexRouter.put('/todoId/:todoId',todoController.updateTodo)
 
 // Update task state
-indexRouter.put('/task/:taskId/state', todoController.updateTodoState)
+indexRouter.put('/todo/state/:todoId', todoController.updateTodoState)
 
 // Exporting Task Controller
 module.exports = indexRouter
