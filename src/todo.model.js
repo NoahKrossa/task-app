@@ -7,7 +7,7 @@ const todoSchema = new Schema({
     description: { type: String },
     completed: {type: Boolean, default: false},
     board: {
-      type: mongoose.Types.ObjectId, ref: 'Board'
+      type: string, ref: 'Board', required: true
     }
 })
 
