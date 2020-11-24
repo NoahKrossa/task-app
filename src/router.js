@@ -1,5 +1,6 @@
 const {Router} = require('express')
 const todoController = require('./todo.controller')
+const boardController = require('./board.controller')
 
 const indexRouter = Router()
 
@@ -20,6 +21,14 @@ indexRouter.put('/todoId/:todoId',todoController.updateTodo)
 
 // Update task state
 indexRouter.put('/todo/state/:todoId', todoController.updateTodoState)
+
+
+/** Board */
+indexRouter.get('/board', boardController.getBoards)
+indexRouter.post('/board', boardController.addBoard)
+indexRouter.delete('/board/:boardId', boardController.removeBoard)
+indexRouter.put('/board/:boardId', boardController.updateBoardName)
+
 
 // Exporting Task Controller
 module.exports = indexRouter
